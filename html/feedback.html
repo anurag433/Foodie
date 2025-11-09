@@ -5,6 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feedback</title>
+    <script>
+        // Immediately apply saved theme to prevent FOUC
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
     <link rel="icon" href="../imgs/favicon.png" type="image/png" />
     <link rel="stylesheet" href="../css/feedback.css">
     <link rel="stylesheet" href="../css/cursor.css">

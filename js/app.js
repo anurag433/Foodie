@@ -81,12 +81,15 @@ const toggleTheme = () => {
 
 themeToggles.forEach(toggle => toggle.addEventListener('click', toggleTheme));
 
-const initTheme = () => {
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    updateThemeIcons(savedTheme);
-};
-initTheme();
+// Initial theme setup is now handled by an inline script in the <head> of each HTML file.
+// This ensures the theme is applied before content renders, preventing FOUC.
+// The following line is removed as it's no longer needed here:
+// initTheme(); 
+// Instead, we just call updateThemeIcons once to ensure the icons are correct on load.
+document.addEventListener('DOMContentLoaded', () => {
+    updateThemeIcons(document.documentElement.getAttribute('data-theme'));
+});
+
 
 // ===== PRODUCTS & CART =====
 let productList = [];
@@ -562,7 +565,7 @@ const modalPrice = document.getElementById('modalPrice');
 const modalDescription = document.getElementById('modalDescription');
 const modalAddBtn = document.getElementById('addToCartBtn');
 const modalViewBtn = document.getElementById('viewCartBtn');
-const modalClose = document.querySelector('#foodModal .close');
+const modalClose = document.querySelector('#foodModal .modal-close'); // Corrected selector
 
 function openFoodModal(product) {
     modalImage.src = product.image;
