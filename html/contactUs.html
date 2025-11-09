@@ -6,6 +6,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foodie - Contact Us</title>
+    <script>
+        // Immediately apply saved theme to prevent FOUC
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
     <link rel="icon" href="../imgs/favicon.png" type="image/png" />
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/contactUs.css">
@@ -316,9 +325,8 @@
             const mobileMenuBtn = document.querySelector(".hamberger");
             const mobileMenu = document.querySelector(".mobile-menu");
 
-            // Load saved theme
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            html.setAttribute('data-theme', savedTheme);
+            // Initial theme setting is now handled by the inline script in the head.
+            // This script only updates the icon and sets up event listeners.
 
             // Update ALL theme toggle icons
             function updateThemeIcon() {
@@ -340,7 +348,7 @@
                 });
             }
 
-            updateThemeIcon();
+            updateThemeIcon(); // Call once on load to set initial icon
 
             // Add event listener to ALL theme toggles
             themeToggles.forEach(toggle => {

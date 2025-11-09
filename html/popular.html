@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Popular & Trending Dishes — Foodie</title>
   <meta name="description" content="A page showcasing top-rated and trending Indian dishes with ratings and appealing visuals." />
+  <script>
+    // Immediately apply saved theme to prevent FOUC
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
   <style>
     :root {
       --bg: #fffdf7;
@@ -274,15 +283,15 @@
 
   <script>
     const toggleBtn = document.getElementById('themeToggle');
-    const body = document.body;
-
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) body.setAttribute('data-theme', savedTheme);
+    // Initial theme setting is now handled by the inline script in the head.
+    // This script only updates the button text based on the current theme.
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    toggleBtn.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
 
     toggleBtn.addEventListener('click', () => {
-      const current = body.getAttribute('data-theme');
+      const current = document.documentElement.getAttribute('data-theme');
       const newTheme = current === 'light' ? 'dark' : 'light';
-      body.setAttribute('data-theme', newTheme);
+      document.documentElement.setAttribute('data-theme', newTheme);
       localStorage.setItem('theme', newTheme);
       toggleBtn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
     });

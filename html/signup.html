@@ -4,6 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Foodie | Login & Sign Up</title>
+  <script>
+    // Immediately apply saved theme to prevent FOUC
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
   <link rel="icon" href="../imgs/favicon.png" type="image/png" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="../css/signUp.css" />
@@ -185,19 +194,19 @@
     setInterval(changeHero, 4000);
 
     // Theme Toggle
-const signupPage = document.querySelector('.signup-page');
-const currentTheme = localStorage.getItem('theme') || 'light';
-signupPage.setAttribute('data-theme', currentTheme);
-updateThemeIcon(currentTheme);
+    // Initial theme setting is now handled by the inline script in the head.
+    // This script only updates the icon and sets up event listeners.
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    updateThemeIcon(currentTheme);
 
-themeToggle.addEventListener('click', () => {
-  const theme = signupPage.getAttribute('data-theme');
-  const newTheme = theme === 'dark' ? 'light' : 'dark';
-  
-  signupPage.setAttribute('data-theme', newTheme);
-  localStorage.setItem('theme', newTheme);
-  updateThemeIcon(newTheme);
-});
+    themeToggle.addEventListener('click', () => {
+      const theme = document.documentElement.getAttribute('data-theme');
+      const newTheme = theme === 'dark' ? 'light' : 'dark';
+      
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateThemeIcon(newTheme);
+    });
 
     function updateThemeIcon(theme) {
       const icon = themeToggle.querySelector('i');
