@@ -265,11 +265,33 @@
     }
 
     .logo {
-        font-size: 2rem;
-        font-weight: bold;
-        color: var(--gold-finger);
-        transition: color 0.3s ease;
-        margin: 0;
+      font-weight: 800;
+      font-size: 2rem;
+      letter-spacing: 1px;
+      text-transform: capitalize;
+      text-decoration: none;
+      background: linear-gradient(90deg, #ffb703, #fb5607, #ff006e, #8338ec, #3a86ff);
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: foodieFlow 6s ease-in-out infinite;
+      transition: transform 0.4s ease, text-shadow 0.4s ease;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .logo:hover {
+      transform: scale(1.08) rotate(-2deg);
+      text-shadow: 0 0 12px rgba(255, 183, 3, 0.6),
+                   0 0 20px rgba(255, 0, 110, 0.5),
+                   0 0 30px rgba(58, 134, 255, 0.4);
+    }
+
+    /* Flowing gradient animation */
+    @keyframes foodieFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .btn {
