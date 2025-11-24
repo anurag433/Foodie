@@ -63,7 +63,7 @@ function loadFooter() {
                     <li class="mt-one"><a href="../html/contactUs.html" class="footer-link"
                             data-i18n="footer.contactUs">Contact Us</a></li>
                     <li class="mt-one"><a href="../html/contributors.html" class="footer-link"
-                            data-i18n="Contribution"> Contributors</a></li>
+                            data-i18n="footer.Contribution"> Contributors</a></li>
                 </ul>
             </div>
         </div>
@@ -73,12 +73,18 @@ function loadFooter() {
     if (footerElement) {
         footerElement.innerHTML = footerHTML;
         
-        // If you are using i18n (translations), trigger an update if the function exists
+        // 1. Update Translations if available
         if (typeof updateTranslations === 'function') {
             updateTranslations();
+        }
+
+        // 2. REFRESH AOS (Fix for invisible footer)
+        if (typeof AOS !== 'undefined') {
+            setTimeout(() => {
+                AOS.refresh();
+            }, 100);
         }
     }
 }
 
-// Load footer when DOM is ready
 document.addEventListener('DOMContentLoaded', loadFooter);
